@@ -6,7 +6,7 @@ namespace Application.Medicines.Commands
     public class CreatePersonalMedicationCommand : IRequest<PersonalMedicationDTO>
     {
         public string Name { get; set; }
-        public string Manufacturer { get; set; }
-        public decimal Price { get; set; }
+        public string Dosage { get; set; }
+        public string Frequency { get; set; }
     }
 }
