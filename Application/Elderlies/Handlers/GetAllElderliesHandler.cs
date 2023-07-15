@@ -1,11 +1,11 @@
 ﻿using Application.Elderlies.Queries;
-using Domain.Entities;
+using Application.Elderlies.Responses;
 using Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.Elderlies.Handlers
 {
-    public class GetAllElderliesHandler : IRequestHandler<GetAllElderliesQuery, List<Elderly>>
+    public class GetAllElderliesHandler : IRequestHandler<GetAllElderliesQuery, List<ElderlyResponse>>
     {
         private readonly IElderlyRepository _repository;
 
@@ -14,10 +14,10 @@ namespace Application.Elderlies.Handlers
             _repository = repository;
         }
 
-        public async Task<List<Elderly>> Handle(GetAllElderliesQuery request, CancellationToken cancellationToken)
+        public async Task<List<ElderlyResponse>> Handle(GetAllElderliesQuery request, CancellationToken cancellationToken)
         {
-            return await _repository.GetAllElderlies(request.Page, request.PageSize, request.SearchTerm, request.SortColumn, request.SortOrder);
+            var elderlies = await _repository.GetAllElderlies(request.Page, request.PageSize, request.SearchTerm, request.SortColumn, request.SortOrder);
+            return elderlies.Select(elderly => (ElderlyResponse)elderly).ToList();
         }
     }
-
 }

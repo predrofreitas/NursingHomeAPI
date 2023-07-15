@@ -1,11 +1,10 @@
-﻿using Application.Medicines.DTOs;
-using Domain.Entities;
+﻿using Application.ElderlyMedications.Responses;
 using Domain.Enums;
 using MediatR;
 
 namespace Application.Medicines.Commands
 {
-    public class CreateElderlyMedicationCommand : IRequest<ElderlyMedication>
+    public class CreateElderlyMedicationCommand : IRequest<ElderlyMedicationResponse>
     {
         public int ElderlyId { get; set; }
         public string Name { get; set; }

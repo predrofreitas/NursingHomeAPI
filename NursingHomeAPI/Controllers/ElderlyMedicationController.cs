@@ -19,7 +19,7 @@ namespace NursingHomeAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllMedications()
         {
-            var query = new GetAllPersonalMedicationsQuery();
+            var query = new GetAllElderlyMedicationsQuery();
             var result = await _mediator.Send(query);
 
             return Ok(result);
@@ -28,7 +28,7 @@ namespace NursingHomeAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMedicationById(int id)
         {
-            var query = new GetPersonalMedicationByIdQuery(id);
+            var query = new GetElderlyMedicationByIdQuery(id);
             var result = await _mediator.Send(query);
 
             if (result is null)
@@ -52,7 +52,7 @@ namespace NursingHomeAPI.Controllers
             var command = new DeleteElderlyMedicationCommand(id);
             var result = await _mediator.Send(command);
 
-            if (result is null)
+            if (!result)
             {
                 return NotFound();
             }

@@ -1,11 +1,12 @@
 ﻿using Application.Elderlies.Commands;
+using Application.Elderlies.Responses;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.Elderlies.Handlers
 {
-    public class CreateElderlyHandler : IRequestHandler<CreateElderlyCommand, Elderly>
+    public class CreateElderlyHandler : IRequestHandler<CreateElderlyCommand, ElderlyResponse>
     {
         private readonly IElderlyRepository _repository;
 
@@ -14,7 +15,7 @@ namespace Application.Elderlies.Handlers
             _repository = repository;
         }
 
-        public async Task<Elderly> Handle(CreateElderlyCommand request, CancellationToken cancellationToken)
+        public async Task<ElderlyResponse> Handle(CreateElderlyCommand request, CancellationToken cancellationToken)
         {
             var elderly = new Elderly
             {

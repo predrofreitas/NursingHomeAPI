@@ -1,9 +1,9 @@
-﻿using Domain.Entities;
+﻿using Application.Elderlies.Responses;
 using MediatR;
 
 namespace Application.Elderlies.Commands
 {
-    public class CreateElderlyCommand : IRequest<Elderly>
+    public class CreateElderlyCommand : IRequest<ElderlyResponse>
     {
         public int Id { get; set; }
         public string Name { get; set; }

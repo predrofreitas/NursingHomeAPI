@@ -15,18 +15,23 @@ namespace Data.Repositories
 
         public async Task<List<ElderlyMedication>> GetAllMedications()
         {
-            return await _dbContext.PersonalMedications.ToListAsync();
+            return await _dbContext.PersonalMedications.Include(em => em.Elderly).ToListAsync();
         }
 
         public async Task<ElderlyMedication> GetMedicationById(int id)
         {
-            return await _dbContext.PersonalMedications.FindAsync(id);
+            return await _dbContext.PersonalMedications
+                .Include(em => em.Elderly)
+                .FirstOrDefaultAsync(em => em.Id == id);
         }
 
         public async Task<ElderlyMedication> CreateMedication(ElderlyMedication medication)
         {
             _dbContext.PersonalMedications.Add(medication);
+
             await _dbContext.SaveChangesAsync();
+            await _dbContext.Entry(medication).Reference(m => m.Elderly).LoadAsync();
+
             return medication;
         }
 

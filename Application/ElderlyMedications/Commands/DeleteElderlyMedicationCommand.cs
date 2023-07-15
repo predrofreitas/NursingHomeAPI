@@ -1,9 +1,8 @@
-﻿using Application.Medicines.DTOs;
-using MediatR;
+﻿using MediatR;
 
 namespace Application.Medicines.Commands
 {
-    public class DeleteElderlyMedicationCommand : IRequest<MedicationDTO>
+    public class DeleteElderlyMedicationCommand : IRequest<bool>
     {
         public int Id { get; }
 
