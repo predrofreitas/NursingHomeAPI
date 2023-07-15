@@ -1,6 +1,8 @@
-﻿using Domain.Entities;
+﻿using Data.Helpers;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Data.Repositories
 {
@@ -13,11 +15,31 @@ namespace Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Elderly>> GetAllElderlies()
+        public async Task<List<Elderly>> GetAllElderlies(int page, int pageSize, string? searchTerm, string? sortColumn, string? sortOrder)
         {
-            return await _dbContext.Elderlies.ToListAsync();
-        }
+            IQueryable<Elderly> elderliesQuery = _dbContext.Elderlies;
+            
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                elderliesQuery = elderliesQuery.Where(e => e.Name.Contains(searchTerm));
+            }
 
+            if (sortOrder?.ToLower() == DataConstants.Descending)
+            {
+                elderliesQuery = elderliesQuery.OrderByDescending(GetSortProperty(sortColumn));
+            }
+            else{
+                elderliesQuery = elderliesQuery.OrderBy(GetSortProperty(sortColumn));
+            }
+
+            var elderlies = await elderliesQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return elderlies;
+        }
+            
         public async Task<Elderly> GetElderlyById(int id)
         {
             return await _dbContext.Elderlies.FindAsync(id);
@@ -39,11 +61,22 @@ namespace Data.Repositories
         public async Task<bool> DeleteElderly(int id)
         {
             var elderly = await _dbContext.Elderlies.FindAsync(id);
-            if (elderly == null)
+
+            if (elderly is null)
+            {
                 return false;
+            }
 
             _dbContext.Elderlies.Remove(elderly);
             return await _dbContext.SaveChangesAsync() > 0;
         }
+
+        private static Expression<Func<Elderly, object>> GetSortProperty(string? sortColumn) =>
+            sortColumn?.ToLower() switch
+            {
+                DataConstants.PropertyName => e => e.Name,
+                DataConstants.PropertyDateOfBirth => e => e.DateOfBirth,
+                _ => e => e.Id
+            };
     }
 }

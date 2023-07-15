@@ -16,7 +16,7 @@ namespace Application.Elderlies.Handlers
 
         public async Task<List<Elderly>> Handle(GetAllElderliesQuery request, CancellationToken cancellationToken)
         {
-            return await _repository.GetAllElderlies();
+            return await _repository.GetAllElderlies(request.Page, request.PageSize, request.SearchTerm, request.SortColumn, request.SortOrder);
         }
     }
 

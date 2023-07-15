@@ -39,8 +39,11 @@ namespace Data.Repositories
         public async Task<bool> DeleteMedication(int id)
         {
             var medication = await _dbContext.PersonalMedications.FindAsync(id);
-            if (medication == null)
+
+            if (medication is null)
+            {
                 return false;
+            }
 
             _dbContext.PersonalMedications.Remove(medication);
             return await _dbContext.SaveChangesAsync() > 0;

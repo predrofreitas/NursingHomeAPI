@@ -17,9 +17,22 @@ namespace NursingHomeAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllElderlies()
+        public async Task<IActionResult> GetAllElderlies(
+            int page,
+            int pageSize,
+            string? searchTerm,
+            string? sortColumn,
+            string? sortOrder)
         {
-            var query = new GetAllElderliesQuery();
+            var query = new GetAllElderliesQuery 
+            {
+                Page = page,
+                PageSize = pageSize,
+                SearchTerm = searchTerm,
+                SortColumn = sortColumn,
+                SortOrder = sortOrder
+            };
+
             var result = await _mediator.Send(query);
 
             return Ok(result);
