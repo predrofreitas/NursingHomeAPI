@@ -7,12 +7,11 @@ namespace NursingHomeAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Route("api/medications")]
-    public class MedicationController : ControllerBase
+    public class PersonalMedicationController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public MedicationController(IMediator mediator)
+        public PersonalMedicationController(IMediator mediator)
         {
             _mediator = mediator;
         }

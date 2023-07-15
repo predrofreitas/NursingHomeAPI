@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Elderlies.Commands
 {
-    public class DeleteElderlyCommand : IRequest<Elderly>
+    public class DeleteElderlyCommand : IRequest<bool>
     {
         public int Id { get; }
 
