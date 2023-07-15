@@ -4,33 +4,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
-    public class PersonalMedicationRepository : IPersonalMedicationRepository
+    public class ElderlyMedicationRepository : IElderlyMedicationRepository
     {
         private readonly AppDbContext _dbContext;
 
-        public PersonalMedicationRepository(AppDbContext dbContext)
+        public ElderlyMedicationRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<List<PersonalMedication>> GetAllMedications()
+        public async Task<List<ElderlyMedication>> GetAllMedications()
         {
             return await _dbContext.PersonalMedications.ToListAsync();
         }
 
-        public async Task<PersonalMedication> GetMedicationById(int id)
+        public async Task<ElderlyMedication> GetMedicationById(int id)
         {
             return await _dbContext.PersonalMedications.FindAsync(id);
         }
 
-        public async Task<PersonalMedication> CreateMedication(PersonalMedication medication)
+        public async Task<ElderlyMedication> CreateMedication(ElderlyMedication medication)
         {
             _dbContext.PersonalMedications.Add(medication);
             await _dbContext.SaveChangesAsync();
             return medication;
         }
 
-        public async Task<bool> UpdateMedication(PersonalMedication medication)
+        public async Task<bool> UpdateMedication(ElderlyMedication medication)
         {
             _dbContext.Entry(medication).State = EntityState.Modified;
             return await _dbContext.SaveChangesAsync() > 0;

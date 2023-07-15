@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Medicines.Queries
 {
-    public class GetAllPersonalMedicationsQuery : IRequest<List<PersonalMedicationDTO>>
+    public class GetAllPersonalMedicationsQuery : IRequest<List<MedicationDTO>>
     {
         public GetAllPersonalMedicationsQuery() { }
     }

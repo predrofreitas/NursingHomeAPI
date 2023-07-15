@@ -11,12 +11,12 @@ namespace Data
         }
 
         public DbSet<Elderly> Elderlies { get; set; }
-        public DbSet<PersonalMedication> PersonalMedications { get; set; }
+        public DbSet<ElderlyMedication> PersonalMedications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ElderlyConfiguration());
-            modelBuilder.ApplyConfiguration(new PersonalMedicationConfiguration());
+            modelBuilder.ApplyConfiguration(new ElderlyMedicationConfiguration());
         }
     }
 }

@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Application.Medicines.Commands
 {
-    public class DeletePersonalMedicationCommand : IRequest<PersonalMedicationDTO>
+    public class DeleteElderlyMedicationCommand : IRequest<MedicationDTO>
     {
         public int Id { get; }
 
-        public DeletePersonalMedicationCommand(int id)
+        public DeleteElderlyMedicationCommand(int id)
         {
             Id = id;
         }

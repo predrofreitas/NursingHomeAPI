@@ -35,7 +35,7 @@ void ConfigureServices(IServiceCollection services)
         options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
     services.AddTransient<IElderlyRepository, ElderlyRepository>();
-    services.AddTransient<IPersonalMedicationRepository, PersonalMedicationRepository>();
+    services.AddTransient<IElderlyMedicationRepository, ElderlyMedicationRepository>();
     
     services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining(typeof(Application.Application)));
 }

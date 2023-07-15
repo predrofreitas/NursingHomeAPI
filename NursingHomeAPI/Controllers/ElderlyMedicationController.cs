@@ -7,11 +7,11 @@ namespace NursingHomeAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonalMedicationController : ControllerBase
+    public class ElderlyMedicationController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public PersonalMedicationController(IMediator mediator)
+        public ElderlyMedicationController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -40,30 +40,16 @@ namespace NursingHomeAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMedication(CreatePersonalMedicationCommand command)
+        public async Task<IActionResult> CreateMedication(CreateElderlyMedicationCommand command)
         {
             var result = await _mediator.Send(command);
             return CreatedAtAction(nameof(GetMedicationById), new { id = result.Id }, result);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMedication(int id, UpdatePersonalMedicationCommand command)
-        {
-            command.Id = id;
-            var result = await _mediator.Send(command);
-
-            if (result is null)
-            {
-                return NotFound();
-            }
-
-            return Ok();
-        }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMedication(int id)
         {
-            var command = new DeletePersonalMedicationCommand(id);
+            var command = new DeleteElderlyMedicationCommand(id);
             var result = await _mediator.Send(command);
 
             if (result is null)

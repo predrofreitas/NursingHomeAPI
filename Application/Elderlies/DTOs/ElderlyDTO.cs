@@ -9,6 +9,6 @@ namespace Application.Elderlies.DTOs
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string Address { get; set; }
-        public List<PersonalMedicationDTO> PersonalMedications { get; set; }
+        public List<MedicationDTO> PersonalMedications { get; set; }
     }
 }

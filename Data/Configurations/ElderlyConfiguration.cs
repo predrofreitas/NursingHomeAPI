@@ -25,7 +25,7 @@ namespace Data.Configurations
                 .HasMaxLength(200)
                 .IsRequired();
 
-            builder.HasMany(e => e.Medications)
+            builder.HasMany(e => e.ElderlyMedications)
                 .WithOne(m => m.Elderly)
                 .HasForeignKey(m => m.ElderlyId);
         }

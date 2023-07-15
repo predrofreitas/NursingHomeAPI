@@ -1,6 +1,6 @@
 ﻿namespace Application.Medicines.DTOs
 {
-    public class PersonalMedicationDTO
+    public class MedicationDTO
     {
         public int Id { get; set; }
         public string MedicationName { get; set; }
