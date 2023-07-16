@@ -13,21 +13,23 @@ namespace Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<ElderlyMedication>> GetAllMedications()
+        public async Task<IQueryable<ElderlyMedication>> GetAllMedicationsQueryable()
         {
-            return await _dbContext.PersonalMedications.Include(em => em.Elderly).ToListAsync();
+            IQueryable<ElderlyMedication> medicationsQuery = _dbContext.ElderlyMedications;
+
+            return medicationsQuery;
         }
 
         public async Task<ElderlyMedication> GetMedicationById(int id)
         {
-            return await _dbContext.PersonalMedications
+            return await _dbContext.ElderlyMedications
                 .Include(em => em.Elderly)
                 .FirstOrDefaultAsync(em => em.Id == id);
         }
 
         public async Task<ElderlyMedication> CreateMedication(ElderlyMedication medication)
         {
-            _dbContext.PersonalMedications.Add(medication);
+            _dbContext.ElderlyMedications.Add(medication);
 
             await _dbContext.SaveChangesAsync();
             await _dbContext.Entry(medication).Reference(m => m.Elderly).LoadAsync();
@@ -43,14 +45,14 @@ namespace Data.Repositories
 
         public async Task<bool> DeleteMedication(int id)
         {
-            var medication = await _dbContext.PersonalMedications.FindAsync(id);
+            var medication = await _dbContext.ElderlyMedications.FindAsync(id);
 
             if (medication is null)
             {
                 return false;
             }
 
-            _dbContext.PersonalMedications.Remove(medication);
+            _dbContext.ElderlyMedications.Remove(medication);
             return await _dbContext.SaveChangesAsync() > 0;
         }
     }

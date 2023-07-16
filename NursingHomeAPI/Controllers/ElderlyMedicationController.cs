@@ -1,4 +1,5 @@
-﻿using Application.Medicines.Commands;
+﻿using Application.Elderlies.Queries;
+using Application.Medicines.Commands;
 using Application.Medicines.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,22 @@ namespace NursingHomeAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllMedications()
+        public async Task<IActionResult> GetAllMedications(
+            int page,
+            int pageSize,
+            string? searchTerm,
+            string? sortColumn,
+            string? sortOrder)
         {
-            var query = new GetAllElderlyMedicationsQuery();
+            var query = new GetAllElderlyMedicationsQuery
+            {
+                Page = page,
+                PageSize = pageSize,
+                SearchTerm = searchTerm,
+                SortColumn = sortColumn,
+                SortOrder = sortOrder
+            };
+
             var result = await _mediator.Send(query);
 
             return Ok(result);

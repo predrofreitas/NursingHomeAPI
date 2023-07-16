@@ -1,9 +1,10 @@
 ﻿using Application.Elderlies.Responses;
+using Application.Helpers;
 using MediatR;
 
 namespace Application.Elderlies.Queries
 {
-    public class GetAllElderliesQuery : IRequest<List<ElderlyResponse>>
+    public class GetAllElderliesQuery : IRequest<PagedList<ElderlyResponse>>
     {
         public int Page { get; set; }
         public int PageSize { get; set; }

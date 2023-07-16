@@ -5,7 +5,6 @@ namespace Application.Elderlies.Commands
 {
     public class CreateElderlyCommand : IRequest<ElderlyResponse>
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }

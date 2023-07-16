@@ -11,7 +11,7 @@ namespace Data
         }
 
         public DbSet<Elderly> Elderlies { get; set; }
-        public DbSet<ElderlyMedication> PersonalMedications { get; set; }
+        public DbSet<ElderlyMedication> ElderlyMedications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
