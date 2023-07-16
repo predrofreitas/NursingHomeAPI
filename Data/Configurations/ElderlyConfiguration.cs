@@ -18,11 +18,7 @@ namespace Data.Configurations
                 .IsRequired();
 
             builder.Property(e => e.Gender)
-                .HasMaxLength(10)
-                .IsRequired();
-
-            builder.Property(e => e.Address)
-                .HasMaxLength(200)
+                .HasMaxLength(20)
                 .IsRequired();
 
             builder.HasMany(e => e.ElderlyMedications)

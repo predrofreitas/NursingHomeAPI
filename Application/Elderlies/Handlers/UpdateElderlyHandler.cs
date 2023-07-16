@@ -25,7 +25,6 @@ namespace Application.Elderlies.Handlers
             elderly.Name = request.Name;
             elderly.DateOfBirth = request.DateOfBirth;
             elderly.Gender = request.Gender;
-            elderly.Address = request.Address;
 
             return await _repository.UpdateElderly(elderly);
         }
