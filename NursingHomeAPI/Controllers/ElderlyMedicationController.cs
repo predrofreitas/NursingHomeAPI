@@ -57,6 +57,12 @@ namespace NursingHomeAPI.Controllers
         public async Task<IActionResult> CreateMedication(CreateElderlyMedicationCommand command)
         {
             var result = await _mediator.Send(command);
+
+            if (result is null)
+            {
+                return NotFound("Elderly not found.");
+            }
+
             return CreatedAtAction(nameof(GetMedicationById), new { id = result.Id }, result);
         }
 

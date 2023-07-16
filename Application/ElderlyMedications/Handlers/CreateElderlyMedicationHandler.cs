@@ -6,15 +6,22 @@ using MediatR;
 
 public class CreateElderlyMedicationHandler : IRequestHandler<CreateElderlyMedicationCommand, ElderlyMedicationResponse>
 {
-    private readonly IElderlyMedicationRepository _repository;
+    private readonly IElderlyMedicationRepository _elderlyMedicationRepository;
+    private readonly IElderlyRepository _elderlyRepository;
 
-    public CreateElderlyMedicationHandler(IElderlyMedicationRepository repository)
+    public CreateElderlyMedicationHandler(IElderlyMedicationRepository elderlyMedicationRepository, IElderlyRepository elderlyRepository)
     {
-        _repository = repository;
+        _elderlyMedicationRepository = elderlyMedicationRepository;
+        _elderlyRepository = elderlyRepository;
     }
 
     public async Task<ElderlyMedicationResponse> Handle(CreateElderlyMedicationCommand request, CancellationToken cancellationToken)
     {
+        if (await _elderlyRepository.GetElderlyById(request.ElderlyId) is null)
+        {
+            return null;
+        }
+
         var elderlyMedication = new ElderlyMedication
         {
             ElderlyId = request.ElderlyId,
@@ -24,7 +31,7 @@ public class CreateElderlyMedicationHandler : IRequestHandler<CreateElderlyMedic
             Manufacturer = request.Manufacturer
         };
 
-        var createdMedication = await _repository.CreateMedication(elderlyMedication);
+        var createdMedication = await _elderlyMedicationRepository.CreateMedication(elderlyMedication);
 
         return createdMedication;
     }
