@@ -5,12 +5,12 @@ A NursingHouseAPI 🏠 é uma API desenvolvida com o objetivo de fornecer recurs
 A API é construída utilizando conceitos e padrões modernos, como o uso de handlers, mediatr e o Entity Framework. O objetivo principal foi organizar a arquitetura de uma forma simples, porém robusta e escalável seguindo alguns conceitos de CQRS.
 
 Para utilizar/testar a API:
-  -Clone o projeto
-  -Atualize a ConnectionString no AppSettings.Json para a sua própria
-  -Abra o Console Nuget (Tools -> NuGet Package Manager -> Package Manager Console)
-  -Adicione a migration (Add-Migration -Project Data)
-  -E por fim dê o update database (Update-Database)
-  -Agora só executar, lembrando de conferir se o projeto NursingHomeAPI está como startup
+  <p>-Clone o projeto</p>
+  <p>-Atualize a ConnectionString no AppSettings.Json para a sua própria</p>
+  <p>-Abra o Console Nuget (Tools -> NuGet Package Manager -> Package Manager Console)</p>
+  <p>-Adicione a migration (Add-Migration -Project Data)</p>
+  <p>-E por fim dê o update database (Update-Database)</p>
+  <p>-Agora só executar, lembrando de conferir se o projeto NursingHomeAPI está como startup</p>
 
 Deixei o Swagger por padrão, mas o teste via Postman, SoapUI e outras ferramentas de teste no geral não será problema, a API por enquanto não possui autenticação.
 
