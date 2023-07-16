@@ -32,9 +32,9 @@ namespace NursingHomeAPI.Controllers
         public async Task<IActionResult> GetAllMedications(
             [FromQuery] int page,
             [FromQuery] int pageSize,
-            [FromQuery] string searchTerm,
-            [FromQuery] string sortColumn,
-            [FromQuery] string sortOrder)
+            [FromQuery] string? searchTerm,
+            [FromQuery] string? sortColumn,
+            [FromQuery] string? sortOrder)
         {
             var query = new GetAllElderlyMedicationsQuery
             {
